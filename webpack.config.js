@@ -12,9 +12,8 @@
 //       title: 'Output Management',
 //     }),
 //   ],
-  
-// };
 
+// };
 
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -22,7 +21,9 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
   entry: {
     index: "./src/javascript/index.js",
-
+    dom_materials: "./src/javascript/dom_materials.js",
+    gameboard: "./src/javascript/gameboard.js",
+    gamecontroller: "./src/javascript/gamecontroller.js",
   },
   mode: "development",
   output: {
@@ -42,8 +43,7 @@ module.exports = {
       inject: "body",
       template: "./src/html/index.html",
       filename: "index.html",
-      chunks: ["index"],
-    })
+    }),
   ],
 
   module: {
