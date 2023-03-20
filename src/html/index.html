@@ -4,16 +4,61 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Connect Four Game</title>
+    <title>Connect-Four Game</title>
   </head>
   <body>
-    <h1>welcome to our game</h1>
-    <div class="test_display"></div>
+    <video
+      src="../assets/images/matrix_moving_wallpaper.mp4"
+      class="background_video"
+      autoplay
+      loop
+      muted
+    ></video>
     <div class="main_container">
-      <div class="header_main_container"></div>
-      <div class="content_main_container">
-        <div class="gameboard_container"></div>
+      <div class="header_main_container">
+        <div class="header_left">
+          <button class="button new_game_button">New Game</button>
+        </div>
+        <div class="header_mid">
+          <div class="header_game_name">Connect Four Game</div>
+        </div>
+        <div class="header_right">
+          <button class="button audio_button">Audio</button>
+          <button class="button info_button">Info</button>
+        </div>
       </div>
+
+      <div class="content_main_container">
+        <!-- <div class="content_header">
+          <h1 class="content_header_game_name">Connect Four Game</h1>
+        </div> -->
+        <div class="content_container">
+          <div class="player_1_container">
+            <h2 class="player_1_name">BERRRK</h2>
+            <div class="player_1_status_round">.</div>
+            <div class="player_1_img_container"></div>
+          </div>
+          <div class="gameboard_container"></div>
+          <div class="player_2_container">
+            <h2 class="player_2_name">EFFEE</h2>
+            <div class="player_2_status_round">.</div>
+            <div class="player_2_img_container"></div>
+          </div>
+        </div>
+      </div>
+      <div class="overlay_for_pop_ups"></div>
+      <div class="gameover_pop_up">
+        <div class="status_winning"></div>
+      </div>
+      <div class="button_pop_up"></div>
+
+      <footer>
+        Here I practiced keeping&nbsp;
+        <em>DOM</em>&nbsp;and&nbsp;<em>Application</em>&nbsp;logic separated.
+        <a href="https://github.com/berkgirgin/Connect-Four"
+          ><img src="../assets/images/github-64.png" alt="git repo"
+        /></a>
+      </footer>
     </div>
   </body>
 </html>

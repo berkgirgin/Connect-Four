@@ -1,4 +1,5 @@
 import "../styles/index.css";
+import gitLogo from "../assets/images/github-64.png";
 // import { CreateMaterialsDOM } from "./dom_materials.js";
 // import { Gameboard } from "./gameboard.js";
 import { GameController } from "./gamecontroller.js";
@@ -10,5 +11,5 @@ console.log(game.gameboard.getBoard());
 console.log(game.gameboard.getBoard()[0]);
 console.log(game.gameboard.getBoard()[0][0]);
 
-game.playRound(game.gameboard.getBoard()[0]);
-game.startNewGame();
+// game.playRound(game.gameboard.getBoard()[0]);
+// game.startNewGame();

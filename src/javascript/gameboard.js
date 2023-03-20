@@ -9,6 +9,9 @@ export function Gameboard() {
   function getBoard() {
     return board;
   }
+  function getDomCreator() {
+    return domCreator;
+  }
 
   function createGameboardGrids() {
     board.length = 0;
@@ -23,6 +26,8 @@ export function Gameboard() {
   }
 
   function Cell(status) {
+    const isWinningCell = false;
+
     function addToken(player) {
       status = player;
     }
@@ -30,7 +35,7 @@ export function Gameboard() {
       return status;
     }
 
-    return { status, addToken, getStatus };
+    return { status, isWinningCell, addToken, getStatus };
   }
 
   function whichCellIsAvailable(column) {
@@ -67,19 +72,98 @@ export function Gameboard() {
   function displayGameboard() {
     domCreator.cleanExistingGameboardElements();
     domCreator.displayGameboardDOM();
-    domCreator.addEventListenerToColumns();
+    domCreator.EventListenerToColumns().add();
+    domCreator.addEventListenerToNewGameButton();
   }
 
-  function checkGameOver() {
-    if (getBoard()[0][0].status != 0) {
-      return true;
-    } else {
-      return false;
+  function checkGameOver(player) {
+    //TO DO: Check why the last number only shows up after the alert!!
+
+    // if (getBoard()[0][0].status != 0) {
+    //   return true;
+    // } else {
+    //   return false;
+    // }
+
+    // //Check draw
+    // function isDraw() {
+    //   for (let col = 0; col < columns; col++) {
+    //     if (board[col][0].status === 0) {
+    //       return false;
+    //     }
+    //   }
+    //   return true;
+    // }
+    // if (isDraw()) {
+    //   return "draw";
+    // }
+
+    // Check columns
+    for (let col = 0; col < columns; col++) {
+      for (let row = 0; row < rows - 3; row++) {
+        if (
+          getBoard()[col][row].status == player.token &&
+          getBoard()[col][row + 1].status == player.token &&
+          getBoard()[col][row + 2].status == player.token &&
+          getBoard()[col][row + 3].status == player.token
+        ) {
+          getBoard()[col][row].isWinningCell = true;
+          getBoard()[col][row + 1].isWinningCell = true;
+          getBoard()[col][row + 2].isWinningCell = true;
+          getBoard()[col][row + 3].isWinningCell = true;
+          return true;
+        }
+      }
     }
+
+    // // Check rows
+    // for (let row = 0; row < rows; row++) {
+    //   for (let col = 0; col < columns - 3; col++) {
+    //     if (
+    //       getBoard()[col][row].status == player.token &&
+    //       getBoard()[col + 1][row].status == player.token &&
+    //       getBoard()[col + 2][row].status == player.token &&
+    //       getBoard()[col + 3][row].status == player.token
+    //     ) {
+    //       return true;
+    //     }
+    //   }
+    // }
+
+    // // Check diagonal (top left to bottom right)
+    // for (let row = 0; row < rows - 3; row++) {
+    //   for (let col = 0; col < columns - 3; col++) {
+    //     if (
+    //       getBoard()[col][row].status == player.token &&
+    //       getBoard()[col + 1][row + 1].status == player.token &&
+    //       getBoard()[col + 2][row + 2].status == player.token &&
+    //       getBoard()[col + 3][row + 3].status == player.token
+    //     ) {
+    //       return true;
+    //     }
+    //   }
+    // }
+
+    // // Check diagonal (top right to bottom left)
+    // for (let row = 0; row < rows - 3; row++) {
+    //   for (let col = 3; col < columns; col++) {
+    //     if (
+    //       getBoard()[col][row].status == player.token &&
+    //       getBoard()[col - 1][row + 1].status == player.token &&
+    //       getBoard()[col - 2][row + 2].status == player.token &&
+    //       getBoard()[col - 3][row + 3].status == player.token
+    //     ) {
+    //       return true;
+    //     }
+    //   }
+    // }
+
+    return false; // no win found
   }
 
   return {
     // board,
+    getDomCreator,
     getBoard,
     createGameboardGrids,
     displayGameboard,

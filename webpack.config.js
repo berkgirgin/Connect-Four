@@ -51,19 +51,6 @@ module.exports = {
       {
         test: /\.html$/i,
         loader: "html-loader",
-        // options: {
-        //   sources: {
-        //     list: [
-        //       // All default supported tags and attributes
-        //       "...",
-        //       {
-        //         tag: "a",
-        //         attribute: "href",
-        //         type: "src",
-        //       },
-        //     ],
-        //   },
-        // },
       },
       {
         test: /\.css$/i,
