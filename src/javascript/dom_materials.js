@@ -58,25 +58,23 @@ export function CreateMaterialsDOM() {
       const newColumn = document.createElement("div");
       newColumn.classList.add("column");
       newColumn.setAttribute("data-column_number", i);
-      // newColumn.classList.add(`column${i}`);
       gameboardContainer.appendChild(newColumn);
 
       for (let j = 0; j < game.gameboard.getBoard()[i].length; j++) {
         const newRow = document.createElement("div");
         newRow.classList.add("row");
         newRow.setAttribute("data-row_number", j);
-        // newRow.classList.add(`row${j}`);
-        //add innerHTML for the cell status ??
-        newRow.innerHTML = game.gameboard.getBoard()[i][j].status;
+
+        // newRow.innerHTML = game.gameboard.getBoard()[i][j].status;
         if (game.gameboard.getBoard()[i][j].status == 1) {
           newRow.setAttribute(
             "style",
-            "background-color: var(--player-1-color);"
+            "background-color: var(--player-1-color); opacity: 1;"
           );
         } else if (game.gameboard.getBoard()[i][j].status == 2) {
           newRow.setAttribute(
             "style",
-            "background-color: var(--player-2-color);"
+            "background-color: var(--player-2-color); opacity: 1;"
           );
         }
 
@@ -87,10 +85,10 @@ export function CreateMaterialsDOM() {
       }
     }
 
-    const player1Name = document.querySelector(".player_1_name");
-    const player2Name = document.querySelector(".player_2_name");
-    player1Name.innerHTML = game.getPlayers()[0].name.toUpperCase();
-    player2Name.innerHTML = game.getPlayers()[1].name.toUpperCase();
+    // const player1Name = document.querySelector(".player_1_name");
+    // const player2Name = document.querySelector(".player_2_name");
+    // player1Name.innerHTML = game.getPlayers()[0].name.toUpperCase();
+    // player2Name.innerHTML = game.getPlayers()[1].name.toUpperCase();
   }
 
   function displayRoundStatusMessage(activePlayer, status_message) {
@@ -117,16 +115,18 @@ export function CreateMaterialsDOM() {
 
   function endGameDOM() {
     const overlay = document.querySelector(".overlay_for_pop_ups");
-
     const gameoverPopUp = document.querySelector(".gameover_pop_up");
+    const buttonNewGame = document.querySelector(".button.new_game_button");
 
     function add() {
       overlay.classList.add("active");
       gameoverPopUp.classList.add("active");
+      buttonNewGame.classList.add("active");
     }
     function remove() {
       overlay.classList.remove("active");
       gameoverPopUp.classList.remove("active");
+      buttonNewGame.classList.remove("active");
     }
     return { add, remove };
   }

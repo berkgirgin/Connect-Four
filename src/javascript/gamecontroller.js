@@ -4,8 +4,8 @@ import { game } from "./index.js";
 export function GameController() {
   const gameboard = Gameboard(); // don't change the name
 
-  const playerOneName = "Player Red";
-  const playerTwoName = "Player Blue";
+  const playerOneName = "Player Blue";
+  const playerTwoName = "Player Red";
 
   const players = [
     {
