@@ -57,7 +57,7 @@
 }
 
 body {
-  background-color: darkcyan;
+  background-color: black;
   color: var(--color_white_custom);
   margin: 0;
   text-shadow: var(--blue-neon-text-shadow-low);
@@ -320,9 +320,9 @@ button:hover {
 /* ****** */
 
 footer {
-  position: fixed;
+  /* position: fixed;
   left: 0;
-  bottom: 0;
+  bottom: 0; */
   width: 100%;
   background-color: red;
   text-align: center;
@@ -338,7 +338,7 @@ footer {
 }
 
 footer img {
-  height: 1.5rem;
+  height: 2rem;
   scale: 1.2;
 }
 
