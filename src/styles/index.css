@@ -13,12 +13,15 @@
   --background-color-army-green-light: #b5b9a4;
   --background-color-army-green-medium: #a3a78d;
   --background-color-army-green-dark: #42453a;
+  --overlay-black: rgba(0, 0, 0, 0.8);
 
-  --player-1-color: blue;
-  --player-2-color: red;
+  --player-1-color: red;
+  --player-2-color: blue;
   --row-cell-background-color: #d1fae5;
   --winning-cells-color: purple;
   --column-padding: 1rem;
+  --default-transition-duration: 1s;
+
   --neon-text-shadow-high: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff,
     0 0 42px #0fa, 0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa, 0 0 151px #0fa;
   --neon-text-shadow-medium: 0 0 3.4px #fff, 0 0 5px #fff, 0 0 10.5px #fff,
@@ -33,7 +36,8 @@
   --pink-neon-text-shadow-low: 0 0 1px #fff, 0 0 2.5px #fff, 0 0 4.5px #fff,
     0 0 9.5px #f09, 0 0 18.25px #f09, 0 0 20px #f09, 0 0 23.5px #f09,
     0 0 35px #f09;
-  --blue-neon-text-shadow-low: 0 0 6px rgba(202, 228, 225, 0.92),
+
+  --blue-neon-text-shadow: 0 0 6px rgba(202, 228, 225, 0.92),
     0 0 30px rgba(202, 228, 225, 0.34), 0 0 12px rgba(30, 132, 242, 0.52),
     0 0 21px rgba(30, 132, 242, 0.92), 0 0 34px rgba(30, 132, 242, 0.78),
     0 0 54px rgba(30, 132, 242, 0.92);
@@ -76,7 +80,7 @@ body {
   justify-content: space-between;
   padding: 0.5rem 4rem;
   padding-top: 1rem;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: var(--overlay-black);
 
   /* background-color: orange; */
 }
@@ -101,10 +105,18 @@ body {
   margin-bottom: 0;
 }
 
+.icon {
+  height: 2rem;
+}
+.new_game_button .icon {
+  scale: 1.2;
+  margin-left: 0.3rem;
+}
+
 button {
   width: 120px;
   height: 50px;
-  /* background-color: var(--color_white_custom); */
+  background-color: var(--color_white_custom);
   border-radius: var(--border-radius);
   box-shadow: inset 0rem 0rem 1rem black;
 
@@ -113,7 +125,10 @@ button {
   text-align: center;
   font-size: 1.4rem;
   cursor: pointer;
-  font-family: "Gruppo";
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 button.new_game_button {
   width: 240px;
@@ -150,19 +165,31 @@ button:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-shadow: var(--blue-neon-text-shadow-low);
+  text-shadow: var(--blue-neon-text-shadow);
+  font-weight: 900;
 }
 
 .player_1_name,
 .player_2_name {
+  padding: 1rem;
+  padding-top: 1.5rem;
   font-size: 2.2rem;
+  /* border: 2px red solid; */
+  border-radius: var(--border-radius);
+  transition-duration: 1s;
+}
+.player_1_name.active,
+.player_2_name.active {
+  text-shadow: var(--pink-neon-text-shadow-low);
+  box-shadow: var(--pink-neon-text-shadow-low);
 }
 
 .player_1_status_round,
 .player_2_status_round {
   font-size: 1.5rem;
   margin-top: 4rem;
-  box-shadow: inset 0rem 0rem 55rem black;
+  border-radius: var(--border-radius);
+  /* box-shadow: inset 0rem 0rem 55rem black; */
 }
 
 /* cutting the pills .svg file in half and use them on both sided */
@@ -172,10 +199,10 @@ button:hover {
   float: left;
   background-image: url(../assets/images/red_pill_blue_pill.svg);
   background-repeat: no-repeat;
-  background-position: left center;
+  background-position: right center;
 }
 .player_1_img_container:nth-child(2) {
-  background-position: right center;
+  background-position: left center;
 }
 .player_2_img_container {
   width: 95%;
@@ -183,10 +210,10 @@ button:hover {
   float: right;
   background-image: url(../assets/images/red_pill_blue_pill.svg);
   background-repeat: no-repeat;
-  background-position: right center;
+  background-position: left center;
 }
 .player_2_img_container:nth-child(2) {
-  background-position: left center;
+  background-position: right center;
 }
 
 .gameboard_container {
@@ -245,12 +272,13 @@ button:hover {
 /* ******************* */
 
 .overlay_for_pop_ups {
+  transition-duration: var(--default-transition-duration);
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: var(--overlay-black);
   opacity: 0;
   pointer-events: none;
   z-index: 3;

@@ -3,9 +3,10 @@ import { game } from "./index.js";
 
 export function GameController() {
   const gameboard = Gameboard(); // don't change the name
+  gameboard.getDomCreator().addHeaderConfig();
 
-  const playerOneName = "Player Blue";
-  const playerTwoName = "Player Red";
+  const playerOneName = "Player Red";
+  const playerTwoName = "Player Blue";
 
   const players = [
     {
@@ -32,9 +33,10 @@ export function GameController() {
     const playRoundLogMessage = `${
       getActivePlayer().name
     } is playing his turn...`;
-    gameboard
-      .getDomCreator()
-      .displayRoundStatusMessage(activePlayer, playRoundLogMessage);
+    gameboard.getDomCreator().displayActivePlayerFocus(activePlayer);
+    // gameboard
+    //   .getDomCreator()
+    //   .displayRoundStatusMessage(activePlayer, playRoundLogMessage);
   }
 
   function startNewGame() {
@@ -52,7 +54,6 @@ export function GameController() {
   function endTheGame(winningStatus) {
     const drawMessage = "It has been a DRAW";
     const winningMessage = `${activePlayer.name} has WON`;
-    // console.log("game has ended");
 
     gameboard.getDomCreator().EventListenerToColumns().remove();
     if (winningStatus === "draw") {
@@ -70,8 +71,6 @@ export function GameController() {
   // }
 
   function playRound(column) {
-    // returns false if game continues, draw? when all cells are full?
-
     if (gameboard.whichCellIsAvailable(column) != undefined) {
       gameboard.dropToken(column, getActivePlayer().token);
       gameboard.displayGameboard();

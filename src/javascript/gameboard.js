@@ -54,10 +54,7 @@ export function Gameboard() {
   }
 
   function dropToken(column, playerToken) {
-    //TO DO: edit with column parameter
     let myColumn = column;
-    //TO DO: remove this line below later
-    // myColumn = board[0];
 
     let selectedCell = whichCellIsAvailable(myColumn);
 
@@ -65,7 +62,6 @@ export function Gameboard() {
       return;
     }
 
-    // TO DO: edit as player.status
     selectedCell.status = playerToken;
   }
 
@@ -77,26 +73,18 @@ export function Gameboard() {
   }
 
   function checkGameOver(player) {
-    //TO DO: Check why the last number only shows up after the alert!!
-
-    // if (getBoard()[0][0].status != 0) {
-    //   return true;
-    // } else {
-    //   return false;
-    // }
-
-    // //Check draw
-    // function isDraw() {
-    //   for (let col = 0; col < columns; col++) {
-    //     if (board[col][0].status === 0) {
-    //       return false;
-    //     }
-    //   }
-    //   return true;
-    // }
-    // if (isDraw()) {
-    //   return "draw";
-    // }
+    //Check draw
+    function isDraw() {
+      for (let col = 0; col < columns; col++) {
+        if (board[col][0].status === 0) {
+          return false;
+        }
+      }
+      return true;
+    }
+    if (isDraw()) {
+      return "draw";
+    }
 
     // Check columns
     for (let col = 0; col < columns; col++) {
@@ -116,47 +104,59 @@ export function Gameboard() {
       }
     }
 
-    // // Check rows
-    // for (let row = 0; row < rows; row++) {
-    //   for (let col = 0; col < columns - 3; col++) {
-    //     if (
-    //       getBoard()[col][row].status == player.token &&
-    //       getBoard()[col + 1][row].status == player.token &&
-    //       getBoard()[col + 2][row].status == player.token &&
-    //       getBoard()[col + 3][row].status == player.token
-    //     ) {
-    //       return true;
-    //     }
-    //   }
-    // }
+    // Check rows
+    for (let row = 0; row < rows; row++) {
+      for (let col = 0; col < columns - 3; col++) {
+        if (
+          getBoard()[col][row].status == player.token &&
+          getBoard()[col + 1][row].status == player.token &&
+          getBoard()[col + 2][row].status == player.token &&
+          getBoard()[col + 3][row].status == player.token
+        ) {
+          getBoard()[col][row].isWinningCell = true;
+          getBoard()[col + 1][row].isWinningCell = true;
+          getBoard()[col + 2][row].isWinningCell = true;
+          getBoard()[col + 3][row].isWinningCell = true;
+          return true;
+        }
+      }
+    }
 
-    // // Check diagonal (top left to bottom right)
-    // for (let row = 0; row < rows - 3; row++) {
-    //   for (let col = 0; col < columns - 3; col++) {
-    //     if (
-    //       getBoard()[col][row].status == player.token &&
-    //       getBoard()[col + 1][row + 1].status == player.token &&
-    //       getBoard()[col + 2][row + 2].status == player.token &&
-    //       getBoard()[col + 3][row + 3].status == player.token
-    //     ) {
-    //       return true;
-    //     }
-    //   }
-    // }
+    // Check diagonal (top left to bottom right)
+    for (let row = 0; row < rows - 3; row++) {
+      for (let col = 0; col < columns - 3; col++) {
+        if (
+          getBoard()[col][row].status == player.token &&
+          getBoard()[col + 1][row + 1].status == player.token &&
+          getBoard()[col + 2][row + 2].status == player.token &&
+          getBoard()[col + 3][row + 3].status == player.token
+        ) {
+          getBoard()[col][row].isWinningCell = true;
+          getBoard()[col + 1][row + 1].isWinningCell = true;
+          getBoard()[col + 2][row + 2].isWinningCell = true;
+          getBoard()[col + 3][row + 3].isWinningCell = true;
+          return true;
+        }
+      }
+    }
 
-    // // Check diagonal (top right to bottom left)
-    // for (let row = 0; row < rows - 3; row++) {
-    //   for (let col = 3; col < columns; col++) {
-    //     if (
-    //       getBoard()[col][row].status == player.token &&
-    //       getBoard()[col - 1][row + 1].status == player.token &&
-    //       getBoard()[col - 2][row + 2].status == player.token &&
-    //       getBoard()[col - 3][row + 3].status == player.token
-    //     ) {
-    //       return true;
-    //     }
-    //   }
-    // }
+    // Check diagonal (top right to bottom left)
+    for (let row = 0; row < rows - 3; row++) {
+      for (let col = 3; col < columns; col++) {
+        if (
+          getBoard()[col][row].status == player.token &&
+          getBoard()[col - 1][row + 1].status == player.token &&
+          getBoard()[col - 2][row + 2].status == player.token &&
+          getBoard()[col - 3][row + 3].status == player.token
+        ) {
+          getBoard()[col][row].isWinningCell = true;
+          getBoard()[col - 1][row + 1].isWinningCell = true;
+          getBoard()[col - 2][row + 2].isWinningCell = true;
+          getBoard()[col - 3][row + 3].isWinningCell = true;
+          return true;
+        }
+      }
+    }
 
     return false; // no win found
   }

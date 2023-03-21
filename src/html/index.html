@@ -14,17 +14,41 @@
       loop
       muted
     ></video>
+    <audio src="../assets/audio/matrix_lobby_shootout.mp3" loop></audio>
     <div class="main_container">
       <div class="header_main_container">
         <div class="header_left">
-          <button class="button new_game_button">New Game</button>
+          <button class="button new_game_button">
+            <img
+              src="../assets/images/restart.png"
+              alt="sound_icon"
+              class="icon"
+            />
+          </button>
         </div>
         <div class="header_mid">
           <div class="header_game_name">Connect Four Game</div>
         </div>
         <div class="header_right">
-          <button class="button audio_button">Audio</button>
-          <button class="button info_button">Info</button>
+          <button class="button audio_button">
+            <img
+              src="../assets/images/audio_off.png"
+              alt="sound_icon"
+              class="icon icon_off"
+            />
+            <img
+              src="../assets/images/audio_on.png"
+              alt="sound_icon"
+              class="icon icon_on"
+            />
+          </button>
+          <button class="button info_button">
+            <img
+              src="../assets/images/info.png"
+              alt="sound_icon"
+              class="icon"
+            />
+          </button>
         </div>
       </div>
 
@@ -34,14 +58,14 @@
         </div> -->
         <div class="content_container">
           <div class="player_1_container">
-            <!-- <h2 class="player_1_name">BERRRK</h2> -->
-            <div class="player_1_status_round">.</div>
+            <h2 class="player_1_name">BERRRK</h2>
+            <!-- <div class="player_1_status_round">.</div> -->
             <div class="player_1_img_container"></div>
           </div>
           <div class="gameboard_container"></div>
           <div class="player_2_container">
-            <!-- <h2 class="player_2_name">EFFEE</h2> -->
-            <div class="player_2_status_round">.</div>
+            <h2 class="player_2_name">EFFEE</h2>
+            <!-- <div class="player_2_status_round">.</div> -->
             <div class="player_2_img_container"></div>
           </div>
         </div>
@@ -50,7 +74,7 @@
       <div class="gameover_pop_up">
         <div class="status_winning"></div>
       </div>
-      <div class="button_pop_up"></div>
+      <div class="info_button_pop_up"></div>
 
       <footer>
         Here I practiced keeping&nbsp;

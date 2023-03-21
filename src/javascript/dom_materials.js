@@ -6,11 +6,8 @@ export function CreateMaterialsDOM() {
   function playRoundClickEvent(event) {
     let columnNumber = event.target.dataset.column_number;
     let selectedColumn = game.gameboard.getBoard()[columnNumber];
-    // console.log(columnNumber);
-    // console.log(selectedColumn);
     game.playRound(selectedColumn);
     console.log(selectedColumn);
-    // console.log(game.getActivePlayer());
   }
 
   function EventListenerToColumns() {
@@ -19,7 +16,6 @@ export function CreateMaterialsDOM() {
     function add() {
       columns.forEach((column) => {
         column.addEventListener("click", (event) => {
-          // console.log(event.target.dataset.column_number);
           playRoundClickEvent(event);
         });
       });
@@ -28,7 +24,6 @@ export function CreateMaterialsDOM() {
     function remove() {
       columns.forEach((column) => {
         column.removeEventListener("click", (event) => {
-          // console.log(event.target.dataset.column_number);
           playRoundClickEvent(event);
         });
       });
@@ -85,32 +80,45 @@ export function CreateMaterialsDOM() {
       }
     }
 
-    // const player1Name = document.querySelector(".player_1_name");
-    // const player2Name = document.querySelector(".player_2_name");
-    // player1Name.innerHTML = game.getPlayers()[0].name.toUpperCase();
-    // player2Name.innerHTML = game.getPlayers()[1].name.toUpperCase();
+    const player1Name = document.querySelector(".player_1_name");
+    const player2Name = document.querySelector(".player_2_name");
+    player1Name.innerHTML = game.getPlayers()[0].name.toUpperCase();
+    player2Name.innerHTML = game.getPlayers()[1].name.toUpperCase();
   }
 
-  function displayRoundStatusMessage(activePlayer, status_message) {
-    const player1_StatusRound = document.querySelector(
-      ".player_1_status_round"
-    );
-    const player2_StatusRound = document.querySelector(
-      ".player_2_status_round"
-    );
+  // function displayRoundStatusMessage(activePlayer, status_message) {
+  //   const player1_StatusRound = document.querySelector(
+  //     ".player_1_status_round"
+  //   );
+  //   const player2_StatusRound = document.querySelector(
+  //     ".player_2_status_round"
+  //   );
 
-    if (activePlayer === game.getPlayers()[0]) {
-      player1_StatusRound.innerHTML = status_message;
-      player2_StatusRound.innerHTML = "...";
-    } else if (activePlayer === game.getPlayers()[1]) {
-      player1_StatusRound.innerHTML = "...";
-      player2_StatusRound.innerHTML = status_message;
-    }
-  }
+  //   if (activePlayer === game.getPlayers()[0]) {
+  //     player1_StatusRound.innerHTML = status_message;
+  //     player2_StatusRound.innerHTML = "&nbsp;";
+  //   } else if (activePlayer === game.getPlayers()[1]) {
+  //     player1_StatusRound.innerHTML = "&nbsp;";
+  //     player2_StatusRound.innerHTML = status_message;
+  //   }
+  // }
 
   function displayWinningStatusMessage(status_message) {
     const statusWinning = document.querySelector(".status_winning");
     statusWinning.innerHTML = status_message;
+  }
+
+  function displayActivePlayerFocus(activePlayer) {
+    const player1Name = document.querySelector(".player_1_name");
+    const player2Name = document.querySelector(".player_2_name");
+
+    if (activePlayer === game.getPlayers()[0]) {
+      player1Name.classList.add("active");
+      player2Name.classList.remove("active");
+    } else if (activePlayer === game.getPlayers()[1]) {
+      player1Name.classList.remove("active");
+      player2Name.classList.add("active");
+    }
   }
 
   function endGameDOM() {
@@ -130,13 +138,86 @@ export function CreateMaterialsDOM() {
     }
     return { add, remove };
   }
+
+  function addHeaderConfig() {
+    function addAudioConfig() {
+      const audio = document.querySelector("audio");
+      const audioIconOn = document.querySelector(
+        "button.audio_button .icon_on"
+      );
+      const audioIconOff = document.querySelector(
+        "button.audio_button .icon_off"
+      );
+      audioIconOn.style.display = "none";
+      const audioButton = document.querySelector("button.audio_button");
+
+      function togglePlay() {
+        if (audio.paused) {
+          audioIconOn.style.display = "block";
+          audioIconOff.style.display = "none";
+          audio.play();
+        } else {
+          audioIconOn.style.display = "none";
+          audioIconOff.style.display = "block";
+          audio.pause();
+        }
+      }
+
+      audioButton.addEventListener("click", () => {
+        togglePlay();
+      });
+    }
+
+    function addInfoButtonConfig() {
+      const overlay = document.querySelector(".overlay_for_pop_ups");
+      const infoButton = document.querySelector("button.info_button");
+      const imagePlayerRed = document.querySelector(".player_1_img_container");
+      const imagePlayerBlue = document.querySelector(".player_2_img_container");
+      const restartButton = document.querySelector("button.new_game_button");
+
+      let isInfoOn = false;
+
+      function infoButtonToggle() {
+        if (!isInfoOn) {
+          restartButton.style = "z-index: 1;";
+          overlay.classList.add("active");
+          infoButton.setAttribute("style", "z-index: 10;");
+          infoButton.style = "z-index: 10;";
+          imagePlayerRed.style =
+            "z-index: 10; transition-duration: var(--default-transition-duration); scale: 1.3";
+          imagePlayerBlue.style =
+            "z-index: 10; transition-duration: var(--default-transition-duration); scale: 1.3";
+
+          isInfoOn = true;
+        } else {
+          restartButton.style = "";
+          overlay.classList.remove("active");
+          infoButton.style = "";
+          imagePlayerRed.style = "";
+          imagePlayerBlue.style = "";
+
+          isInfoOn = false;
+        }
+      }
+
+      infoButton.addEventListener("click", () => {
+        infoButtonToggle();
+      });
+    }
+
+    addAudioConfig();
+    addInfoButtonConfig();
+  }
+
   return {
     EventListenerToColumns,
     cleanExistingGameboardElements,
     displayGameboardDOM,
-    displayRoundStatusMessage,
+    // displayRoundStatusMessage,
     displayWinningStatusMessage,
+    displayActivePlayerFocus,
     addEventListenerToNewGameButton,
     endGameDOM,
+    addHeaderConfig,
   };
 }
