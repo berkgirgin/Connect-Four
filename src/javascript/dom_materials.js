@@ -184,9 +184,9 @@ export function CreateMaterialsDOM() {
           infoButton.setAttribute("style", "z-index: 10;");
           infoButton.style = "z-index: 10;";
           imagePlayerRed.style =
-            "z-index: 10; transition-duration: var(--default-transition-duration); scale: 1.3";
+            "z-index: 10; transition-duration: var(--default-transition-duration); scale: 1.3;";
           imagePlayerBlue.style =
-            "z-index: 10; transition-duration: var(--default-transition-duration); scale: 1.3";
+            "z-index: 10; transition-duration: var(--default-transition-duration); scale: 1.3;";
 
           isInfoOn = true;
         } else {
